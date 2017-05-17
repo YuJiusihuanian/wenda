@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    <!--全屏-->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!--取消默认拨打电话-->
+    <meta name="format-detection" content="telephone=no">
+    <!--苹果状态栏-->
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <!--uc-->
+    <meta name="full-screen" content="yes">
+    <!--qq-->
+    <meta name="x5-fullscreen" content="true">
+    <title>wenda1.1</title>
+  </head>
+  <body>
+    <div id="app">
+      <router-view></router-view>
+    </div>
+     <!--built files will be auto injected-->
+    <script>
+      setSize();
+      window.addEventListener("resize", setSize, false);
+      window.addEventListener("orientationchange", setSize, false);
+      function setSize() {
+        var html = document.getElementsByTagName('html')[0];
+        var width = html.getBoundingClientRect().width;
+        html.style.fontSize = width / 16 + "px";
+      }
+    </script>
+    <script>
+      if (!HTMLElement.currentStyle) {
+        function _getStyle(prop) {
+          var _s = window.getComputedStyle(this, null)
+          return prop ? _s[prop] : _s;
+        }
+        HTMLElement.prototype.currentStyle = _getStyle;
+        HTMLElement.prototype.getStyle = _getStyle;
+      }
+      // 阻止微信下拉出黑底插件
+      function PreventScroll() {
+        // // 非微信浏览器直接跳出 -- 后来发现好些浏览器都有这个坑，所以去掉
+        // var ua = navigator.userAgent.toLowerCase();
+        // if (!ua.match(/MicroMessenger/i)) return;
+
+        var elem = arguments || []; // 传入绑定的元素
+        var $elem = [];     // 存储所有需要监听的元素
+
+        // 获取需要监听的元素
+        for (var i=0,len=elem.length; i<len; i++) {
+          var $e = document.querySelectorAll(elem[i]);
+          if (!$e) {console.error('您输入的元素不对，请检查'); return;}
+          for(var j=0; j<$e.length; j++) {
+            if ($e[j].currentStyle('overflow').match(/auto|scroll/i)) {
+              $elem.push($e[j]);
+            }
+          }
+        }
+
+        window.addEventListener('touchstart', function(e){
+          window.scroll_start = e.touches[0].clientY;
+        });
+        window.addEventListener('touchmove', prevent);
+
+        function prevent(e) {
+          var status = '11'; // 1容许 0禁止，十位表示向上滑动，个位表示向下滑动
+          var startY = window.scroll_start;
+          var currentY = e.touches[0].clientY;
+          var direction = currentY - startY > 0 ? '10' : '01';  // 当前的滚动方向，10 表示向上滑动
+
+          $elem.forEach(function(ele){
+            var scrollTop = ele.scrollTop,
+              offsetHeight = ele.offsetHeight,
+              scrollHeight = ele.scrollHeight;
+
+            if (scrollTop === 0) {
+              // 到顶，禁止向下滑动，或高度不够，禁止滑动
+              status = offsetHeight >= scrollHeight ? '00' : '01';
+            } else if (scrollTop + offsetHeight >= scrollHeight) {
+              // 到底，则禁止向上滑动
+              status = '10';
+            }
+          });
+
+          // output.innerHTML = status + ' ' + ++count;
+          // 如果有滑动障碍，如到顶到底等
+          if (status != '11') {
+            if (!(parseInt(status, 2) & parseInt(direction, 2))) {
+              e.preventDefault();
+              return;
+            }
+          }
+        }
+      }
+      1
+
+      PreventScroll('.main', '.header', '.footer','#app');
+    </script>
+  </body>
+</html>
