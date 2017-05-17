@@ -19,9 +19,9 @@
   mounted(){
       setTimeout(() => {
           this.$router.push({
-            path: '/home'
+            name:'Home',
           });
-      },4000);
+      },2000);
   }
 }
 </script>

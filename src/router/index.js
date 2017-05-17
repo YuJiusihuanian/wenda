@@ -20,7 +20,7 @@ export default new Router({
     {
       path: '/home',
       name: 'Home',
-      component: Home
+      component: Home,
     },
     {
       path: '/publish',

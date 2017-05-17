@@ -15,6 +15,9 @@
       't-abbar':Tabbar,
       'n-avbar':Navbar,
       'l-oadmore':Loadmore
+    },
+    methods:{
+
     }
   }
 </script>
