@@ -19,7 +19,7 @@
   }
 </script>
 <style lang="less" scoped>
-  @import '../less/common.less';
+
 
   #Home{
     width:100%;

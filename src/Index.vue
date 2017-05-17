@@ -28,7 +28,7 @@
 
 <style lang="less">
   @import './less/config.less';
-  /*@import 'less/common.less';*/
+  @import 'less/common.less';
   #Index{
     width:320/@font;
     height:568/@font;
@@ -69,7 +69,5 @@
     height:100%;
     background:url(./assets/gif/login.gif) no-repeat center;
     background-size:200/@font 200/@font;
-   // margin-top:46/@font;
-    //margin-bottom:55/@font;
   }
 </style>

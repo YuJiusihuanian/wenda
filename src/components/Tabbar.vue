@@ -34,7 +34,6 @@
 </script>
 
 <style lang="less" scoped>
-  @import "../less/common";
   @import "../less/config.less";
     .btnPadding{
         padding:34/@font 28/@font 6/@font 28/@font;

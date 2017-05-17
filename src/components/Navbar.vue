@@ -1,17 +1,17 @@
 <template>
   <div id="Navbar">
     <mt-navbar v-model="selected" :fixed=true>
-      <mt-tab-item class="bg" id="1" to="/message">全部</mt-tab-item>
-      <mt-tab-item class="bg" id="2">精华</mt-tab-item>
-      <mt-tab-item class="bg" id="3">分享</mt-tab-item>
-      <mt-tab-item class="bg" id="4">问答</mt-tab-item>
-      <mt-tab-item class="bg" id="5">招聘</mt-tab-item>
+      <mt-tab-item class="bg" id="1"><router-link to="{'name':'list',query}">全部</router-link></mt-tab-item>
+      <mt-tab-item class="bg" id="2"><router-link to="/message">精华</router-link></mt-tab-item>
+      <mt-tab-item class="bg" id="3"><router-link to="/message">分享</router-link></mt-tab-item>
+      <mt-tab-item class="bg" id="4"><router-link to="/message">问答</router-link></mt-tab-item>
+      <mt-tab-item class="bg" id="5"><router-link to="/message">招聘</router-link></mt-tab-item>
     </mt-navbar>
 
     <!-- tab-container -->
     <mt-tab-container v-model="selected" :swipeable=true>
       <mt-tab-container-item id="1">
-        <!--<l-oadmore></l-oadmore>-->
+
         <!--<mt-cell v-for="n in 15" :key="n" :title="'内容 ' + n + n" />-->
       </mt-tab-container-item>
       <mt-tab-container-item id="2">
