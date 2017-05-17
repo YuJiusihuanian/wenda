@@ -10,7 +10,7 @@ const Message = resolve => require(['../views/Message.vue'], resolve);
 const More = resolve => require(['../views/More.vue'], resolve);
 
 export default new Router({
-  mode:'history',
+  mode:'hash',
   routes: [
     {
       path: '/',
