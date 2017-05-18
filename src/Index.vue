@@ -12,6 +12,9 @@
   import Navbar from './components/Navbar'
   export default {
   name: 'Index',
+  data(){
+    bg:require('./assets/gif/login.gif')
+  },
   components:{
     't-abbar':Tabbar,
     'n-avbar':Navbar,
@@ -67,7 +70,6 @@
   body{
     width:100%;
     height:100%;
-    background:url(./assets/gif/login.gif) no-repeat center;
     background-size:200/@font 200/@font;
   }
 </style>

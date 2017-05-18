@@ -2,10 +2,27 @@
   <div id="Loadmore">
     <mt-loadmore :top-method="loadTop" @top-status-change="handleTopChange" ref="loadmore">
       <ul>
-        <li v-for="item in list" :key="item.id">
-
+        <li v-for="item in topics" :key="item.id">
           <router-link to="/">
-            {{ topics }}
+            <h3 v-text="item.title"></h3>
+            <div class="content">
+              <img :src="item.author.avatar_url" alt="">
+              <div class="info">
+                <p>
+                  <span class="name">
+                    {{item.author.loginname}}
+                  </span>
+                  <span class="status">
+                    <b>{{item.reply_count}}</b>
+                    /{{item.visit_count}}
+                  </span>
+                </p>
+                <p>
+                  <time>{{item.create_at}}</time>
+                  <time>{{item.last_reply_at}}</time>
+                </p>
+              </div>
+            </div>
           </router-link>
         </li>
         <button @click="getTopics">加载数据</button>
@@ -29,8 +46,8 @@
         list:20,
         hide:'hide',
         title:{},
-        topics:{},
-        index:{},
+        topics: [],
+        index: {},
         topicarg:{
           page:4,
           tab:'all',
@@ -49,7 +66,6 @@
       }
     },
     beforeRouteLeave(){
-        console.log('111');
     },
     methods: {
 
@@ -61,13 +77,15 @@
       },
       loadTop() {
       // 加载更多数据
-        this.list=50;
+        this.getTopics();
         //加载完成
         this.$refs.loadmore.onTopLoaded();
       },
       getTopics(tab){
+          let _this = this;
         this.$ajax({
           method: 'get',
+          responseType: 'json',
           url: 'https://cnodejs.org/api/v1/topics',
           data: {},
           //请求参数
@@ -83,42 +101,36 @@
           }
 
         }).then(function (response) {
-
           let topics = {
             date: response.data.data[0].content,
             length: response.data.length,
           }
-          if (response && response.data && response.data.data) {
-              console.log(response.data.data);
-            response.data.data.forEach(this.mergeTopics);
+          console.log(response.data.data)
+          if ( response.data && response.data.data) {
+            response.data.data.forEach(_this.mergeTopics);
+
           }
         })
-          .catch(function (error) {
-//                console.log(error);
-          })
       },
       mergeTopics(topic) {
-          console.log(topic);
-        if (typeof this.index[topic.id] === 'number') {
-          const topicsIndex = this.index[topic.id];
-          this.topics[topicsIndex] = topic;
-        } else {
-          this.index[topic.id] = this.topics.length;
-          this.topics.push(topic);
-        }
-      },
+        this.index[topic.id] = this.topics.length;
+        this.topics.push(topic);
+        console.log(this.topics.length);
+      }
     },
     watch:{
       $route (to , from){
           if(to.query.tab){
               this.topicarg.tab = to.query.tab;
+              this.topics = [];
+              this.index = {};
           }else{
-            this.topicarg.tab = 'all'
+            this.topicarg.tab = 'all';
+            this.topics = [];
+            this.index = {};
           }
           this.topicarg.page = 1;
           this.getTopics();
-        console.log(this.topicarg.tab);
-        console.log(this);
         console.log(this.topics);
       }
     }

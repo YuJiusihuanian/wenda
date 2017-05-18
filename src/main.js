@@ -6,7 +6,6 @@ import router from './router/index.js'
 import Mint from 'mint-ui'
 import axios from 'axios';
 import 'mint-ui/lib/style.css';
-
 Vue.config.productionTip = false
 Vue.use(Mint);
 Vue.prototype.$ajax = axios;
