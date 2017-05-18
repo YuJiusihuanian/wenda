@@ -7,30 +7,6 @@
       <mt-tab-item :class="{'is-selected':this.$route.query.tab === 'ask'}" id="4"><router-link class="abg" :to="{'Home':'home',query:{tab:'ask'}}">问答</router-link></mt-tab-item>
       <mt-tab-item :class="{'is-selected':this.$route.query.tab === 'job'}" id="5"><router-link class="abg" :to="{'Home':'home',query:{tab:'job'}}">招聘</router-link></mt-tab-item>
     </mt-navbar>
-
-    <!-- tab-container -->
-    <!--<mt-tab-container v-model="selected" :swipeable=true>-->
-      <!--<mt-tab-container-item id="1">-->
-
-        <!--&lt;!&ndash;<mt-cell v-for="n in 15" :key="n" :title="'内容 ' + n + n" />&ndash;&gt;-->
-      <!--</mt-tab-container-item>-->
-      <!--<mt-tab-container-item id="2">-->
-        <!--&lt;!&ndash;<l-oadmore></l-oadmore>&ndash;&gt;-->
-        <!--&lt;!&ndash;<mt-cell v-for="n in 4" :key="n" :title="'测试 ' + n" />&ndash;&gt;-->
-      <!--</mt-tab-container-item>-->
-      <!--<mt-tab-container-item id="3">-->
-        <!--&lt;!&ndash;<l-oadmore></l-oadmore>&ndash;&gt;-->
-        <!--&lt;!&ndash;<mt-cell v-for="n in 10" :key="n" :title="'选项 ' + n" />&ndash;&gt;-->
-      <!--</mt-tab-container-item>-->
-      <!--<mt-tab-container-item id="4">-->
-        <!--&lt;!&ndash;<l-oadmore></l-oadmore>&ndash;&gt;-->
-        <!--&lt;!&ndash;<mt-cell v-for="n in 10" :key="n" :title="'选项 ' + n" />&ndash;&gt;-->
-      <!--</mt-tab-container-item>-->
-      <!--<mt-tab-container-item id="5">-->
-        <!--&lt;!&ndash;<l-oadmore></l-oadmore>&ndash;&gt;-->
-        <!--&lt;!&ndash;<mt-cell v-for="n in 10" :key="n" :title="'选项 ' + n" />&ndash;&gt;-->
-      <!--</mt-tab-container-item>-->
-    <!--</mt-tab-container>-->
   </div>
 </template>
 <script>
@@ -56,6 +32,12 @@
     width:100%;
     background:#fff;
   }
+  #Navbar a{
+    font-size:28px;
+  }
+  #Navbar .mint-navbar a{
+    padding:0.3rem 0;
+  }
   .mint-navbar .mint-tab-item.is-selected{
     color:#FDDF6D !important;
     border-color:#FDDF6D !important;
@@ -64,14 +46,14 @@
     width:100%;
   }
   .mint-cell:first-child{
-    margin-top:48/@font;
+    margin-top:0.48rem;
     border-color:#fff !important;
   }
   .mint-tab-item-label a{
 
   }
-  .abg{
-    padding:16px 20/@font 16px 20/@font;
+  #Navbar .mint-navbar a.abg{
+    padding:0.3rem 0.36rem;
  }
   .bg{
   }

@@ -2,12 +2,14 @@
   <div id="Loadmore">
     <mt-loadmore :top-method="loadTop" @top-status-change="handleTopChange" ref="loadmore">
       <ul>
-        <li v-for="item in topics" :key="item.id">
-          <router-link to="/">
-            <h3 v-text="item.title"></h3>
+        <li class="topic" v-for="item in topics" :key="item.id">
+          <router-link to="/home">
+            <div class="img">
+              <img class="head" :src="item.author.avatar_url" alt="">
+            </div>
             <div class="content">
-              <img :src="item.author.avatar_url" alt="">
               <div class="info">
+                <h3 v-text="item.title"></h3>
                 <p>
                   <span class="name">
                     {{item.author.loginname}}
@@ -43,11 +45,9 @@
     data() {
       return {
         topStatus: '',
-        list:20,
-        hide:'hide',
-        title:{},
         topics: [],
         index: {},
+        hide:'hide',
         topicarg:{
           page:4,
           tab:'all',
@@ -138,12 +138,56 @@
   };
 </script>
 <style lang="less" scoped>
-  @import '../less/config.less';
   #Loadmore{
     background:#fff;
     width:100%;
     height:100%;
-    /*margin-top:4px;*/
-    margin-bottom:55px;
+    margin-bottom:0.55rem;
+    font-size:24px;
+    margin-top:1.2rem;
+  }
+  #Loadmore .topic{
+    width:100%;
+    height:1.4rem;
+    position:relative;
+    margin-bottom:0.1rem;
+    border-bottom:1px solid #ccc;
+    width:100%;
+  }
+  #Loadmore .topic a{
+    width:100%;
+    height:1rem;
+  }
+  #Loadmore h3{
+    font-size:28px;
+    color: #001013;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  #Loadmore .topic .img{
+    width:20%;
+    height:100%;
+    position:absolute;
+  }
+  #Loadmore .topic img.head{
+    position:absolute;
+    left:0.3rem;
+    border-radius:50%;
+    height:0.8rem;
+    width:0.8rem;
+    top:50%;
+    margin-top:-0.4rem;
+  }
+  #Loadmore .topic .content{
+    left:23%;
+    top:0;
+    position:absolute;
+    margin-bottom:0.2rem;
+    width:72%;
+  }
+  #Loadmore .mint-loadmore-top span{
+    font-size:20px;
+    color:#666;
   }
 </style>

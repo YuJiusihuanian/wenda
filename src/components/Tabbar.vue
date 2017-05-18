@@ -34,11 +34,14 @@
 </script>
 
 <style lang="less" scoped>
-  @import "../less/config.less";
-    .btnPadding{
-        padding:34/@font 28/@font 6/@font 28/@font;
-    }
-    #tabbar a{
-        color:#8a8a8a;
-    }
+  .btnPadding{
+    padding:0.46rem 0.52rem 0.18rem 0.52rem;
+  }
+  #tabbar a{
+    color:#8a8a8a;
+    font-size:28px;
+  }
+  #tabbar{
+    padding:0.12rem 0;
+  }
 </style>
