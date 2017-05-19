@@ -3,7 +3,7 @@
     <mt-loadmore :top-method="loadTop" @top-status-change="handleTopChange" ref="loadmore">
       <ul>
         <li class="topic" v-for="item in topics" :key="item.id">
-          <router-link to="/home">
+          <router-link :to="{name:'Topic',params:{id:item.id}}">
             <div class="img">
               <img class="head" :src="item.author.avatar_url" alt="">
             </div>
@@ -27,8 +27,6 @@
             </div>
           </router-link>
         </li>
-        <button @click="getTopics">加载数据</button>
-        <button @click="gettab">点击</button>
       </ul>
       <div slot="top" class="mint-loadmore-top">
         <span v-show="topStatus === 'pull'" :class="{ 'rotate': topStatus === 'drop' }">↓</span>
@@ -41,6 +39,7 @@
   </div>
 </template>
 <script>
+  import utils from '../lib/utils.js'
   export default {
     data() {
       return {
@@ -49,7 +48,7 @@
         index: {},
         hide:'hide',
         topicarg:{
-          page:4,
+          page:1,
           tab:'all',
           limit:20,
           mdrender:true
@@ -64,6 +63,13 @@
       if(this.$route.query && this.$route.query.tab){
         this.topicarg.tab = this.$route.query.tab;
       }
+      if (window.window.sessionStorage.topicarg && window.window.sessionStorage.tab === this.topicarg.tab) {
+        this.topics = JSON.parse(window.window.sessionStorage.topics);
+        this.topicarg = JSON.parse(window.window.sessionStorage.topicarg);
+//        this.$nextTick(() => $(window).scrollTop(window.window.sessionStorage.scrollTop));
+      } else {
+        this.getTopics();
+      }
     },
     beforeRouteLeave(){
     },
@@ -73,11 +79,10 @@
         this.topStatus = status;
       },
       gettab(){
-        console.log(this.list);
       },
       loadTop() {
       // 加载更多数据
-        this.getTopics();
+        this.page +=1;
         //加载完成
         this.$refs.loadmore.onTopLoaded();
       },
@@ -105,7 +110,6 @@
             date: response.data.data[0].content,
             length: response.data.length,
           }
-          console.log(response.data.data)
           if ( response.data && response.data.data) {
             response.data.data.forEach(_this.mergeTopics);
 
@@ -115,7 +119,21 @@
       mergeTopics(topic) {
         this.index[topic.id] = this.topics.length;
         this.topics.push(topic);
-        console.log(this.topics.length);
+      },
+      getTitles(tab){
+          let str = '';
+          switch(tab){
+            case 'share' : str = '分享';
+            break;
+            case 'ask' : str = '问答';
+            break;
+            case 'job' : str = "招聘";
+            break;
+            case 'good' : str ='精华';
+            break;
+            default: str = '全部';
+            break;
+          }
       }
     },
     watch:{
@@ -131,7 +149,6 @@
           }
           this.topicarg.page = 1;
           this.getTopics();
-        console.log(this.topics);
       }
     }
 
@@ -160,7 +177,8 @@
   }
   #Loadmore h3{
     font-size:28px;
-    color: #001013;
+    color: #1e1e1e;
+    /*color: #d6bf5f;*/
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

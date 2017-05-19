@@ -1,7 +1,7 @@
 <template>
   <div id="Navbar">
     <mt-navbar v-model="selected" :fixed=true>
-      <mt-tab-item :class="{'is-selected':!this.$route.query.tab}" id="1"><router-link class="abg" :to="{'Home':'home'}">全部</router-link></mt-tab-item>
+      <mt-tab-item :class="{'is-selected':!this.$route.query.tab}" id="1"><router-link class="abg" :to="{'Home':'home'}">主页</router-link></mt-tab-item>
       <mt-tab-item :class="{'is-selected':this.$route.query.tab === 'good'}" id="2"><router-link class="abg" :to="{'Home':'home',query:{tab:'good'}}">精华</router-link></mt-tab-item>
       <mt-tab-item :class="{'is-selected':this.$route.query.tab === 'share'}" id="3"><router-link class="abg" :to="{'Home':'home',query:{tab:'share'}}">分享</router-link></mt-tab-item>
       <mt-tab-item :class="{'is-selected':this.$route.query.tab === 'ask'}" id="4"><router-link class="abg" :to="{'Home':'home',query:{tab:'ask'}}">问答</router-link></mt-tab-item>
