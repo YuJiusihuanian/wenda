@@ -1,6 +1,6 @@
 <template>
   <div id="Loadmore">
-    <mt-loadmore :top-method="loadTop" @top-status-change="handleTopChange" ref="loadmore">
+    <mt-loadmore :bottom-method="loadBottom" @top-status-change="handleBottomChange" ref="loadmore">
       <ul>
         <li class="topic" v-for="item in topics" :key="item.id">
           <router-link :to="{name:'Topic',params:{id:item.id}}">
@@ -10,30 +10,29 @@
             <div class="content">
               <div class="info">
                 <h3 v-text="item.title"></h3>
-                <p>
-                  <span class="name">
-                    {{item.author.loginname}}
-                  </span>
+                <p class="tabinfo">
                   <span class="status">
-                    <b>{{item.reply_count}}</b>
+                    {{item.reply_count}}
                     /{{item.visit_count}}
                   </span>
-                </p>
-                <p>
-                  <time>{{item.create_at}}</time>
-                  <time>{{item.last_reply_at}}</time>
+                  <span class="tabtopgood">
+                    <span v-if="item.tab" :class="getTabInfoTab(item.tab,true)" v-text="getTabInfoTab(item.tab,false)"></span>
+                    <span v-if="item.top" :class="getTabInfoTop(item.top,true)" v-text="getTabInfoTop(item.top,false)"></span>
+                    <span v-if="item.good" :class="getTabInfoGood(item.good,true)" v-text="getTabInfoGood(item.good,false)"></span>
+                  </span>
+                  <time class="time">{{item.last_reply_at | getLastTimeStr(true)}}</time>
                 </p>
               </div>
             </div>
           </router-link>
         </li>
       </ul>
-      <div slot="top" class="mint-loadmore-top">
-        <span v-show="topStatus === 'pull'" :class="{ 'rotate': topStatus === 'drop' }">↓</span>
-        <span v-show="topStatus === 'pull'" :class="{ 'rotate': topStatus === 'drop' }">下拉刷新</span>
-        <span v-show="topStatus === 'drop'" :class="{ 'rotate': topStatus === 'drop' }">↑</span>
-        <span v-show="topStatus === 'drop'" :class="{ 'rotate': topStatus === 'drop' }">释放更新</span>
-        <span v-show="topStatus === 'loading'" :class="hide">加载中...</span>
+      <div slot="bottom" class="mint-loadmore-bottom">
+        <span v-show="bottomStatus === 'pull'" :class="{ 'rotate': bottomStatus === 'drop' }">↓</span>
+        <span v-show="bottomStatus === 'pull'" :class="{ 'rotate': bottomStatus === 'drop' }">下拉刷新</span>
+        <span v-show="bottomStatus === 'drop'" :class="{ 'rotate': bottomStatus === 'drop' }">↑</span>
+        <span v-show="bottomStatus === 'drop'" :class="{ 'rotate': bottomStatus === 'drop' }">释放更新</span>
+        <span v-show="bottomStatus === 'loading'" :class="hide">加载中...</span>
       </div>
     </mt-loadmore>
   </div>
@@ -43,7 +42,7 @@
   export default {
     data() {
       return {
-        topStatus: '',
+        bottomStatus: '',
         topics: [],
         index: {},
         hide:'hide',
@@ -75,16 +74,18 @@
     },
     methods: {
 
-      handleTopChange(status) {
-        this.topStatus = status;
+      handleBottomChange(status) {
+        this.bottomStatus = status;
+        console.log(status);
       },
       gettab(){
       },
-      loadTop() {
+      loadBottom() {
       // 加载更多数据
-        this.page +=1;
+//        this.topicarg.page += 1;
+//        this.getTopics();
         //加载完成
-        this.$refs.loadmore.onTopLoaded();
+//        this.$refs.loadmore.onBottomLoaded();
       },
       getTopics(tab){
           let _this = this;
@@ -106,6 +107,7 @@
           }
 
         }).then(function (response) {
+            console.log(response);
           let topics = {
             date: response.data.data[0].content,
             length: response.data.length,
@@ -134,6 +136,21 @@
             default: str = '全部';
             break;
           }
+      },
+      getTabInfo(tab, good = true, top, isClass) {
+        return utils.getTabInfo(tab, good, top, isClass);
+      },
+      getLastTimeStr(time, ago) {
+        return utils.getLastTimeStr(time, ago);
+      },
+      getTabInfoTab(tab,isClass){
+        return utils.getTabInfoTab(tab, isClass);
+      },
+      getTabInfoGood(good,isClass){
+          return utils.getTabInfoGood(good,isClass);
+      },
+      getTabInfoTop(top,isClass){
+          return utils.getTabInfoTop(top,isClass);
       }
     },
     watch:{
@@ -199,13 +216,41 @@
   }
   #Loadmore .topic .content{
     left:23%;
-    top:0;
+    top:50%;
     position:absolute;
-    margin-bottom:0.2rem;
+    margin-top:-0.4rem;
     width:72%;
+    height:0.8rem;
   }
   #Loadmore .mint-loadmore-top span{
     font-size:20px;
     color:#666;
+  }
+  #Loadmore .ask,#Loadmore .job,#Loadmore .share{
+    font-size:18px;
+  }
+  #Loadmore .top{
+    color:red;
+    font-size:18px;
+  }
+  #Loadmore .good{
+    color:#FDDF6D;
+    font-size:18px;
+  }
+  #Loadmore .tabinfo{
+    padding-top:0.1rem;
+    display: inline-flex;
+    width:100%;
+    justify-content:space-between;
+  }
+  #Loadmore .status{
+    box-flex:1;
+  }
+  #Loadmore .rabtopgood{
+    box-flex:2;
+  }
+  #Loadmore .time{
+    box-flex:2;
+
   }
 </style>

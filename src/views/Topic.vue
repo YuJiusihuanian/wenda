@@ -10,7 +10,8 @@
           <time>
             发布于{{topic.create_at | getLastTimeStr(true)}}
           </time>
-          <span>{{topic.visit_count}}次浏览</span>
+          <span v-text="getTabInfo(topic.tab, topic.good, topic.top, false)"></span>
+          <span>{{topic.reply_count}}/{{topic.visit_count}}</span>
         </div>
       </div>
       <div class="article" v-html="topic.content">
@@ -25,7 +26,7 @@
               <img :src="item.author.avatar_url" alt="">
             </router-link>
               <span v-text="item.author.loginname"></span>
-              <span>{{item.create_at}}</span>
+              <span>{{item.create_at | getLastTimeStr(true)}}</span>
             </div>
             <div class="content" v-html="item.content">
 
@@ -57,19 +58,22 @@
             url:'https://cnodejs.org/api/v1/topic/' + this.topicId
           })
             .then(function(response){
-                console.log(response);
                 if(response.data.data){
                   _this.topic = response.data.data;
-//                  console.log(_this.topic);
+                  console.log(_this.topic);
                 }else{
                   _this.noData = true;
                 }
             })
       },
-      mothods:{
+      methods:{
+        getTabInfo(tab, good = false, top, isClass) {
+          return utils.getTabInfo(tab, good, top, isClass);
+        },
         getLastTimeStr(time, ago) {
           return utils.getLastTimeStr(time, ago);
         },
+
       }
 
     }

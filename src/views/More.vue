@@ -9,6 +9,7 @@
     name:'More',
     components:{
       't-abbar':Tabbar,
+
     }
   }
 </script>
