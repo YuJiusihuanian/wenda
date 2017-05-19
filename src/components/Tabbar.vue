@@ -42,6 +42,6 @@
     font-size:28px;
   }
   #tabbar{
-    padding:0.12rem 0 0 0;
+    padding:0.12rem 0 0.04rem 0;
   }
 </style>

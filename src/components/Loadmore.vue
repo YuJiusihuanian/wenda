@@ -1,7 +1,6 @@
 <template>
   <div id="Loadmore">
-    <mt-loadmore :bottom-method="loadBottom" @top-status-change="handleBottomChange" ref="loadmore">
-      <ul>
+      <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10">
         <li class="topic" v-for="item in topics" :key="item.id">
           <router-link :to="{name:'Topic',params:{id:item.id}}">
             <div class="img">
@@ -27,14 +26,6 @@
           </router-link>
         </li>
       </ul>
-      <div slot="bottom" class="mint-loadmore-bottom">
-        <span v-show="bottomStatus === 'pull'" :class="{ 'rotate': bottomStatus === 'drop' }">↓</span>
-        <span v-show="bottomStatus === 'pull'" :class="{ 'rotate': bottomStatus === 'drop' }">下拉刷新</span>
-        <span v-show="bottomStatus === 'drop'" :class="{ 'rotate': bottomStatus === 'drop' }">↑</span>
-        <span v-show="bottomStatus === 'drop'" :class="{ 'rotate': bottomStatus === 'drop' }">释放更新</span>
-        <span v-show="bottomStatus === 'loading'" :class="hide">加载中...</span>
-      </div>
-    </mt-loadmore>
   </div>
 </template>
 <script>
@@ -42,12 +33,12 @@
   export default {
     data() {
       return {
-        bottomStatus: '',
+        topStatus: '',
         topics: [],
         index: {},
         hide:'hide',
         topicarg:{
-          page:1,
+          page:0,
           tab:'all',
           limit:20,
           mdrender:true
@@ -74,18 +65,14 @@
     },
     methods: {
 
-      handleBottomChange(status) {
-        this.bottomStatus = status;
-        console.log(status);
-      },
-      gettab(){
-      },
-      loadBottom() {
-      // 加载更多数据
-//        this.topicarg.page += 1;
-//        this.getTopics();
-        //加载完成
-//        this.$refs.loadmore.onBottomLoaded();
+      loadMore() {
+        this.loading = true;
+        setTimeout(() => {
+          this.topicarg.page += 1;
+          this.getTopics();
+          this.loading = false;
+          console.log(this.topicarg.page);
+        }, 2500);
       },
       getTopics(tab){
           let _this = this;
