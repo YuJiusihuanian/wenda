@@ -1,20 +1,24 @@
 <template>
-    <mt-tabbar id="tabbar" :fixed=true>
+    <mt-tabbar v-model="selected" id="tabbar" :fixed=true>
         <mt-tab-item id="首页">
-          <img slot="icon" src="../assets/svg/home.svg">
-          <router-link :class="btnPadding" to="/home">首页</router-link>
+          <img v-show="this.$route.path ==='/home'" slot="icon" src="../assets/svg/home.svg">
+          <img v-show="this.$route.path !=='/home'" slot="icon" src="../assets/svg/home-hover.svg">
+          首页
         </mt-tab-item>
-        <mt-tab-item  id="提问">
-          <img slot="icon" src="../assets/svg/publish.svg">
-          <router-link :class="btnPadding" to="/publish">提问</router-link>
+        <mt-tab-item  id="发表">
+          <img v-show="this.$route.path === '/publish'" slot="icon" src="../assets/svg/publish.svg">
+          <img v-show="this.$route.path !== '/publish'" slot="icon" src="../assets/svg/publish-hover.svg">
+          发表
         </mt-tab-item>
         <mt-tab-item  id="消息">
-          <img slot="icon" src="../assets/svg/message.svg">
-          <router-link :class="btnPadding" to="/message">消息</router-link>
+          <img v-show="this.$route.path === '/message'" slot="icon" src="../assets/svg/message.svg">
+          <img v-show="this.$route.path !== '/message'" slot="icon" src="../assets/svg/message-hover.svg">
+          消息
         </mt-tab-item>
         <mt-tab-item  id="我的">
-          <img slot="icon" src="../assets/svg/more.svg">
-          <router-link :class="btnPadding" to="/more">我的</router-link>
+          <img v-show="this.$route.path === '/more'" slot="icon" src="../assets/svg/more.svg">
+          <img v-show="this.$route.path !== '/more'" slot="icon" src="../assets/svg/more-hover.svg">
+          我的
         </mt-tab-item>
     </mt-tabbar>
 </template>
@@ -25,8 +29,27 @@
       data(){
           return{
             selected:'',
-            btnPadding:'btnPadding',
-            fixed:true
+            fixed:true,
+            selected:''
+        }
+      },
+      methods:{
+
+      },
+      watch:{
+        selected:function(str){
+            if(str){
+                switch(str){
+                  case '首页':this.$router.push('/home');
+                  break;
+                  case '发表':this.$router.push('/publish');
+                    break;
+                  case '消息':this.$router.push('/message');
+                    break;
+                  case '我的':this.$router.push('/more');
+                    break;
+                }
+            }
         }
       }
     }
@@ -34,18 +57,16 @@
 </script>
 
 <style lang="less">
-  .btnPadding{
-    padding:0.68rem 0.52rem 0.04rem 0.52rem;
-  }
+  @import '../less/common.less';
   #tabbar a{
     color:#8a8a8a;
-    font-size:0.24rem;
-  }
-  #tabbar{
-    padding:0.12rem 0 0.04rem 0;
+    font-size:0.3rem;
   }
   .mint-tab-item .mint-tab-item-icon{
     width:0.40rem !important;
     height:0.40rem !important;
+  }
+  .mint-tab-item-label{
+    font-size:0.32rem;
   }
 </style>

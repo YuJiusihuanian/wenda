@@ -145,7 +145,7 @@
       }
     },
     watch:{
-      $route (to , from){
+      '$route' (to , from){
           if(to.query.tab){
               this.topicarg.tab = to.query.tab;
               this.topics = [];
@@ -169,7 +169,7 @@
     height:100%;
     margin-bottom:1rem;
     font-size:0.24rem;
-    margin-top:1rem;
+    margin-top:0.6rem;
   }
   #Loadmore .topic{
     width:100%;

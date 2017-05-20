@@ -1,9 +1,12 @@
 <template>
   <ul
-    v-infinite-scroll="loadMore"
+    v-infinite-scroll=""
     infinite-scroll-disabled="loading"
     infinite-scroll-distance="10">
     <li v-for="item in list">{{ item }}</li>
+    <div @click="ccc">div点击</div>
+    <button @click="ccc">点击</button>
+    <a @click="ccc">a点击</a>
   </ul>
 </template>
 <script>
@@ -17,6 +20,10 @@
       };
     },
     methods: {
+        ccc(){
+            console.log(111);
+            this.$router.push('/message');
+        },
       loadMore() {
         this.loading = true;
         setTimeout(() => {
