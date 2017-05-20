@@ -1,6 +1,6 @@
 <template>
   <div id="Loadmore">
-      <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="10">
+      <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
         <li class="topic" v-for="item in topics" :key="item.id">
           <router-link :to="{name:'Topic',params:{id:item.id}}">
             <div class="img">
@@ -26,6 +26,7 @@
           </router-link>
         </li>
       </ul>
+    <img v-show="this.topicarg.page!=1" class="loginimg" src="../assets/gif/login-min.gif" alt="">
   </div>
 </template>
 <script>
@@ -37,8 +38,10 @@
         topics: [],
         index: {},
         hide:'hide',
+        loading:false,
+        loginimg:false,
         topicarg:{
-          page:0,
+          page:1,
           tab:'all',
           limit:20,
           mdrender:true
@@ -67,10 +70,12 @@
 
       loadMore() {
         this.loading = true;
+        this.loginimg = true;
         setTimeout(() => {
           this.topicarg.page += 1;
           this.getTopics();
           this.loading = false;
+//          this.loginimg = false;
           console.log(this.topicarg.page);
         }, 2500);
       },
@@ -163,9 +168,9 @@
     background:#fff;
     width:100%;
     height:100%;
-    margin-bottom:0.55rem;
+    margin-bottom:1rem;
     font-size:24px;
-    margin-top:1.2rem;
+    margin-top:1rem;
   }
   #Loadmore .topic{
     width:100%;
@@ -239,5 +244,12 @@
   #Loadmore .time{
     box-flex:2;
 
+  }
+  #Loadmore .loginimg{
+    width:1rem;
+    height:1rem;
+    position:absolute;
+    left:50%;
+    margin-left:-0.5rem;
   }
 </style>
