@@ -33,7 +33,7 @@
     background:#fff;
   }
   #Navbar a{
-    font-size:28px;
+    font-size:0.28rem;
   }
   #Navbar .mint-navbar a{
     padding:0.3rem 0;

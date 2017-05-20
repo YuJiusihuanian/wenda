@@ -52,19 +52,18 @@
       },
       mounted(){
           this.topicId = this.$route.params.id;
-          let _this =this;
           this.$ajax({
             method: 'get',
             url:'https://cnodejs.org/api/v1/topic/' + this.topicId
           })
             .then(function(response){
                 if(response.data.data){
-                  _this.topic = response.data.data;
-                  console.log(_this.topic);
+                  this.topic = response.data.data;
+                  console.log(this.topic);
                 }else{
-                  _this.noData = true;
+                  this.noData = true;
                 }
-            })
+            }.bind(this))
       },
       methods:{
         getTabInfo(tab, good = false, top, isClass) {
@@ -82,6 +81,6 @@
   #Topic{
     background:#fff;
     width:100%;
-    font-size:28px;
+    font-size:0.28rem;
   }
 </style>

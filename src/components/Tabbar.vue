@@ -33,15 +33,19 @@
 
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
   .btnPadding{
-    padding:0.46rem 0.52rem 0.04rem 0.52rem;
+    padding:0.68rem 0.52rem 0.04rem 0.52rem;
   }
   #tabbar a{
     color:#8a8a8a;
-    font-size:28px;
+    font-size:0.24rem;
   }
   #tabbar{
     padding:0.12rem 0 0.04rem 0;
+  }
+  .mint-tab-item .mint-tab-item-icon{
+    width:0.40rem !important;
+    height:0.40rem !important;
   }
 </style>

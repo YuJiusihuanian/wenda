@@ -3,6 +3,7 @@ var utils = require('./utils')
 var config = require('../config')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var vueLoaderConfig = require('./vue-loader.conf')
+// var pxtorem = require('postcss-pxtorem')
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -25,6 +26,9 @@ module.exports = {
       '@': resolve('src')
     }
   },
+  // postcss: function() {
+  //   return [pxtorem({remUnit: 34.5})];
+  // },
   module: {
     rules: [
       {
@@ -53,24 +57,24 @@ module.exports = {
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       },
-      {
-        test: /\.less$/,
-        include: [resolve('src'), resolve('test')],
-        exclude: [/node_modules\/(?!(ng2-.+|ngx-.+))/],
-        use: ExtractTextPlugin.extract({
-          use: ['css-loader', 'less-loader'],
-          fallback: 'style-loader'
-        })
-      },
-      {
-        test: /\.css$/,
-        include: [resolve('src'), resolve('test')],
-        exclude: [/node_modules\/(?!(ng2-.+|ngx-.+))/],
-        use: ExtractTextPlugin.extract({
-          use: ['css-loader'],
-          fallback: 'style-loader'
-        })
-      }
+      // {
+      //   test: /\.less$/,
+      //   include: [resolve('src'), resolve('test')],
+      //   exclude: [/node_modules\/(?!(ng2-.+|ngx-.+))/],
+      //   use: ExtractTextPlugin.extract({
+      //     use: ['css-loader', 'less-loader'],
+      //     fallback: 'style-loader'
+      //   })
+      // },
+      // {
+      //   test: /\.css$/,
+      //   include: [resolve('src'), resolve('test')],
+      //   exclude: [/node_modules\/(?!(ng2-.+|ngx-.+))/],
+      //   use: ExtractTextPlugin.extract({
+      //     use: ['css-loader'],
+      //     fallback: 'style-loader'
+      //   })
+      // }
     ]
   }
 }

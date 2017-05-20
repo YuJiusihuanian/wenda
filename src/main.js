@@ -12,6 +12,9 @@ Vue.config.productionTip = false
 Vue.use(Mint);
 Vue.prototype.$ajax = axios;
 
+
+
+
 // 实例化Vue的filter
 Object.keys(filters).forEach(k => Vue.filter(k, filters[k]));
 

@@ -80,7 +80,6 @@
         }, 2500);
       },
       getTopics(tab){
-          let _this = this;
         this.$ajax({
           method: 'get',
           responseType: 'json',
@@ -105,10 +104,10 @@
             length: response.data.length,
           }
           if ( response.data && response.data.data) {
-            response.data.data.forEach(_this.mergeTopics);
+            response.data.data.forEach(this.mergeTopics);
 
           }
-        })
+        }.bind(this))
       },
       mergeTopics(topic) {
         this.index[topic.id] = this.topics.length;
@@ -169,7 +168,7 @@
     width:100%;
     height:100%;
     margin-bottom:1rem;
-    font-size:24px;
+    font-size:0.24rem;
     margin-top:1rem;
   }
   #Loadmore .topic{
@@ -215,19 +214,19 @@
     height:0.8rem;
   }
   #Loadmore .mint-loadmore-top span{
-    font-size:20px;
+    font-size:0.2rem;
     color:#666;
   }
   #Loadmore .ask,#Loadmore .job,#Loadmore .share{
-    font-size:18px;
+    font-size:0.18rem;
   }
   #Loadmore .top{
     color:red;
-    font-size:18px;
+    font-size:0.18rem;
   }
   #Loadmore .good{
     color:#FDDF6D;
-    font-size:18px;
+    font-size:0.18rem;
   }
   #Loadmore .tabinfo{
     padding-top:0.1rem;
@@ -239,10 +238,11 @@
     box-flex:1;
   }
   #Loadmore .rabtopgood{
-    box-flex:2;
+    box-flex:1;
   }
   #Loadmore .time{
-    box-flex:2;
+    box-flex:1;
+    box-flex:1;
 
   }
   #Loadmore .loginimg{
@@ -252,4 +252,5 @@
     left:50%;
     margin-left:-0.5rem;
   }
+
 </style>
