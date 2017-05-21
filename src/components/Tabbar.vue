@@ -1,21 +1,21 @@
 <template>
     <mt-tabbar v-model="selected" id="tabbar" :fixed=true>
-        <mt-tab-item id="首页">
+        <mt-tab-item href="#/home" id="1">
           <img v-show="this.$route.path ==='/home'" slot="icon" src="../assets/svg/home.svg">
           <img v-show="this.$route.path !=='/home'" slot="icon" src="../assets/svg/home-hover.svg">
           首页
         </mt-tab-item>
-        <mt-tab-item  id="发表">
+        <mt-tab-item  href="#/publish" id="2">
           <img v-show="this.$route.path === '/publish'" slot="icon" src="../assets/svg/publish.svg">
           <img v-show="this.$route.path !== '/publish'" slot="icon" src="../assets/svg/publish-hover.svg">
           发表
         </mt-tab-item>
-        <mt-tab-item  id="消息">
+        <mt-tab-item  href="#/message" id="3">
           <img v-show="this.$route.path === '/message'" slot="icon" src="../assets/svg/message.svg">
           <img v-show="this.$route.path !== '/message'" slot="icon" src="../assets/svg/message-hover.svg">
           消息
         </mt-tab-item>
-        <mt-tab-item  id="我的">
+        <mt-tab-item  href="#/more" id="4">
           <img v-show="this.$route.path === '/more'" slot="icon" src="../assets/svg/more.svg">
           <img v-show="this.$route.path !== '/more'" slot="icon" src="../assets/svg/more-hover.svg">
           我的
@@ -56,17 +56,18 @@
 
 </script>
 
-<style lang="less">
+<style lang="less" scpoed>
   @import '../less/common.less';
   #tabbar a{
     color:#8a8a8a;
     font-size:0.3rem;
+    background-color:#fff !important;
   }
   .mint-tab-item .mint-tab-item-icon{
     width:0.40rem !important;
     height:0.40rem !important;
   }
   .mint-tab-item-label{
-    font-size:0.32rem;
+    font-size:0.32rem !important;
   }
 </style>

@@ -43,13 +43,13 @@
     }
   }
 </script>
-<style lang="less">
+<style lang="less" scoped>
   #Navbar{
     width:100%;
     background:#fff;
   }
   #Navbar a{
-    font-size:0.32rem;
+    font-size:0.32rem !important;
   }
   .mint-navbar .mint-tab-item.is-selected{
     color:#FDDF6D !important;

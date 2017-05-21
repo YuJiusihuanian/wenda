@@ -1,19 +1,22 @@
 <template>
-  <ul
-    v-infinite-scroll=""
-    infinite-scroll-disabled="loading"
-    infinite-scroll-distance="10">
-    <li v-for="item in list">{{ item }}</li>
-    <div @click="ccc">div点击</div>
-    <button @click="ccc">点击</button>
-    <a @click="ccc">a点击</a>
-  </ul>
+  <!--<ul-->
+    <!--v-infinite-scroll=""-->
+    <!--infinite-scroll-disabled="loading"-->
+    <!--infinite-scroll-distance="10">-->
+    <!--<li v-for="item in list">{{ item }}</li>-->
+    <!--<div @click="ccc">div点击</div>-->
+    <!--<button @click="ccc">点击</button>-->
+    <!--<a @click="ccc">a点击</a>-->
+  <!--</ul>-->
+
+
 </template>
 <script>
   export default {
     data() {
       return {
         topStatus: '',
+        selected:'',
         list:[],
         loading:false
         // ...

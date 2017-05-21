@@ -4,14 +4,9 @@
 </template>
 
 <script>
-//  import Tabbar from './components/Tabbar'
-//  import Navbar from './components/Navbar'
   export default {
   name: 'Index',
-//  components:{
-//    't-abbar':Tabbar,
-//    'n-avbar':Navbar,
-//  },
+
   mounted(){
       setTimeout(() => {
           this.$router.push({
@@ -25,7 +20,7 @@
 <style lang="less">
   @import 'less/common.less';
   body{
-    background:url(./assets/gif/login.gif) no-repeat center;
-    background-size:2rem 2rem;
+    background:url(./assets/gif/login4.gif) no-repeat center #fff;
+    background-size:1.2rem 1.2rem;
   }
 </style>

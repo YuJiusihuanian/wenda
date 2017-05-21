@@ -26,7 +26,7 @@
           </router-link>
         </li>
       </ul>
-    <img v-show="this.topicarg.page!=1" class="loginimg" src="../assets/gif/login-min.gif" alt="">
+    <!--<img v-show="this.topicarg.page!=1" class="loginimg" src="../assets/gif/login-min.gif" alt="">-->
   </div>
 </template>
 <script>
