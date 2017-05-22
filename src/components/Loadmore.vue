@@ -1,6 +1,6 @@
 <template>
   <div id="Loadmore">
-      <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="1">
+      <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="30">
         <li class="topic" v-for="item in topics" :key="item.id">
           <router-link :to="{name:'Topic',params:{id:item.id}}">
             <div class="img">
@@ -64,8 +64,19 @@
         this.getTopics();
       }
     },
-    beforeRouteLeave(){
-    },
+//    beforeRouteEnter (to, from, next) {
+////        console.log(from.name);
+//      if (from.name !== 'topic') {
+//        // 页面切换移除之前记录的数据集
+////        console.log(window.window.sessionStorage.tab);
+//        if (window.window.sessionStorage.tab) {
+//          window.window.sessionStorage.removeItem('topics');
+//          window.window.sessionStorage.removeItem('topicarg');
+//          window.window.sessionStorage.removeItem('tab');
+//        }
+//      }
+//      next();
+//    },
     methods: {
 
       loadMore() {
@@ -98,7 +109,6 @@
           }
 
         }).then(function (response) {
-            console.log(response);
           let topics = {
             date: response.data.data[0].content,
             length: response.data.length,
@@ -198,7 +208,8 @@
   }
   #Loadmore .topic img.head{
     position:absolute;
-    left:0.3rem;
+    left:50%;
+    margin-left:-0.4rem;
     border-radius:50%;
     height:0.8rem;
     width:0.8rem;
@@ -220,14 +231,7 @@
   #Loadmore .ask,#Loadmore .job,#Loadmore .share{
     font-size:0.18rem;
   }
-  #Loadmore .top{
-    color:red;
-    font-size:0.18rem;
-  }
-  #Loadmore .good{
-    color:#FDDF6D;
-    font-size:0.18rem;
-  }
+
   #Loadmore .tabinfo{
     padding-top:0.1rem;
     display: inline-flex;
