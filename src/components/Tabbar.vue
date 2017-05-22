@@ -37,20 +37,20 @@
 
       },
       watch:{
-        selected:function(str){
-            if(str){
-                switch(str){
-                  case '首页':this.$router.push('/home');
-                  break;
-                  case '发表':this.$router.push('/publish');
-                    break;
-                  case '消息':this.$router.push('/message');
-                    break;
-                  case '我的':this.$router.push('/more');
-                    break;
-                }
-            }
-        }
+//        selected:function(str){
+//            if(str){
+//                switch(str){
+//                  case '首页':this.$router.push('/home');
+//                  break;
+//                  case '发表':this.$router.push('/publish');
+//                    break;
+//                  case '消息':this.$router.push('/message');
+//                    break;
+//                  case '我的':this.$router.push('/more');
+//                    break;
+//                }
+//            }
+//        }
       }
     }
 
