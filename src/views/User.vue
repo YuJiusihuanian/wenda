@@ -1,39 +1,24 @@
 <template>
   <div id="User">
-    <div class="header">
-      <h3>个人中心</h3>
-      <!--<button @click="abc">退出登录</button>-->
-      <img :src="user.avatar_url" alt="" class="userimg">
-      <p class="username" v-text="user.loginname"></p>
-      <!--<div class="headertext">-->
-        <!--<span v-text="">2017.05-.13</span>-->
-        <!--<span>积分:{{user.score}}</span>-->
-      <!--</div>-->
-      <mt-navbar class="listitem" v-model="selected">
-        <mt-tab-item id="1">最近回复</mt-tab-item>
-        <mt-tab-item id="2">最新发布</mt-tab-item>
-      </mt-navbar>
-    </div>
-    <mt-tab-container class="list" v-model="selected">
-      <mt-tab-container-item id="1">
-        <ul>
-        <li :key="item.id" v-for="item in recent_replies">
-          <router-link class="listimg" to="/home">
-            <img :src="item.author.avatar_url" alt="">
-          </router-link>
-          <router-link class="listcontent" to="/home">
-            <h4 class="title">{{item.title}}</h4>
-            <p class="nametime">
-              <span>{{item.author.loginname}}</span>
-              <span v-text="">{{item.last_reply_at | getLastTimeStr(true)}}</span>
-            </p>
-          </router-link>
-        </li>
-        </ul>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="2">
-        <ul>
-          <li :key="item.id" v-for="item in recent_topics">
+    <div v-if="userInfo">
+      <div class="header">
+        <h3>个人中心</h3>
+        <!--<button @click="abc">退出登录</button>-->
+        <img :src="user.avatar_url" alt="" class="userimg">
+        <p class="username" v-text="user.loginname"></p>
+        <!--<div class="headertext">-->
+          <!--<span v-text="">2017.05-.13</span>-->
+          <!--<span>积分:{{user.score}}</span>-->
+        <!--</div>-->
+        <mt-navbar class="listitem" v-model="selected">
+          <mt-tab-item id="1">最近回复</mt-tab-item>
+          <mt-tab-item id="2">最新发布</mt-tab-item>
+        </mt-navbar>
+      </div>
+      <mt-tab-container class="list" v-model="selected">
+        <mt-tab-container-item id="1">
+          <ul>
+          <li :key="item.id" v-for="item in recent_replies">
             <router-link class="listimg" to="/home">
               <img :src="item.author.avatar_url" alt="">
             </router-link>
@@ -41,14 +26,31 @@
               <h4 class="title">{{item.title}}</h4>
               <p class="nametime">
                 <span>{{item.author.loginname}}</span>
-                <span>{{item.last_reply_at | getLastTimeStr(true)}}</span>
+                <span v-text="">{{item.last_reply_at | getLastTimeStr(true)}}</span>
               </p>
             </router-link>
           </li>
-        </ul>
-      </mt-tab-container-item>
-
-    </mt-tab-container>
+          </ul>
+        </mt-tab-container-item>
+        <mt-tab-container-item id="2">
+          <ul>
+            <li :key="item.id" v-for="item in recent_topics">
+              <router-link class="listimg" to="/home">
+                <img :src="item.author.avatar_url" alt="">
+              </router-link>
+              <router-link class="listcontent" to="/home">
+                <h4 class="title">{{item.title}}</h4>
+                <p class="nametime">
+                  <span>{{item.author.loginname}}</span>
+                  <span>{{item.last_reply_at | getLastTimeStr(true)}}</span>
+                </p>
+              </router-link>
+            </li>
+          </ul>
+        </mt-tab-container-item>
+      </mt-tab-container>
+    </div>
+    <l-ogin v-if="!userInfo"></l-ogin>
     <t-abbar></t-abbar>
   </div>
 </template>
@@ -56,7 +58,8 @@
   import utils from '../lib/utils.js';
   import { Toast } from 'mint-ui';
   import Tabbar from '../components/Tabbar.vue';
-  import { mapMutations } from 'vuex'
+  import Login from '../components/Login.vue';
+  import { mapGetters , mapMutations } from 'vuex'
     export default{
         name: 'User',
       data(){
@@ -69,10 +72,31 @@
         }
       },
       components:{
-          't-abbar':Tabbar
+          't-abbar':Tabbar,
+          'l-ogin':Login
+      },
+      computed:{
+        ...mapGetters({
+          userInfo:'getUserInfo'
+        })
       },
       mounted(){
         this.getUser();
+        if(this.userInfo.loginname){
+          this.$router.push({
+            name:'User',
+            params:{
+              loginname:this.userInfo.loginname
+            }
+          })
+        }else{
+          this.$router.push({
+            name:'More',
+//            params:{
+//              loginname:this.userInfo.loginname
+//            }
+          })
+        }
         if(!this.$route.params.loginname){
             this.getUser();
           }
