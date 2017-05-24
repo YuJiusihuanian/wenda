@@ -19,10 +19,10 @@
         <mt-tab-container-item id="1">
           <ul>
           <li :key="item.id" v-for="item in recent_replies">
-            <router-link class="listimg" to="/home">
+            <router-link class="listimg" :to="{name:'User',params:{loginname:item.author.loginname}}">
               <img :src="item.author.avatar_url" alt="">
             </router-link>
-            <router-link class="listcontent" to="/home">
+            <router-link :to="{name:'Topic',params:{id:item.id}}" class="listcontent">
               <h4 class="title">{{item.title}}</h4>
               <p class="nametime">
                 <span>{{item.author.loginname}}</span>
@@ -35,10 +35,10 @@
         <mt-tab-container-item id="2">
           <ul>
             <li :key="item.id" v-for="item in recent_topics">
-              <router-link class="listimg" to="/home">
+              <router-link class="listimg" :to="{name:'User',params:{loginname:item.author.loginname}}">
                 <img :src="item.author.avatar_url" alt="">
               </router-link>
-              <router-link class="listcontent" to="/home">
+              <router-link :to="{name:'Topic',params:{id:item.id}}" class="listcontent">
                 <h4 class="title">{{item.title}}</h4>
                 <p class="nametime">
                   <span>{{item.author.loginname}}</span>
@@ -82,21 +82,21 @@
       },
       mounted(){
         this.getUser();
-        if(this.userInfo.loginname){
-          this.$router.push({
-            name:'User',
-            params:{
-              loginname:this.userInfo.loginname
-            }
-          })
-        }else{
-          this.$router.push({
-            name:'More',
+//        if(this.userInfo.loginname){
+//          this.$router.push({
+//            name:'User',
 //            params:{
 //              loginname:this.userInfo.loginname
 //            }
-          })
-        }
+//          })
+//        }else{
+//          this.$router.push({
+//            name:'More',
+////            params:{
+////              loginname:this.userInfo.loginname
+////            }
+//          })
+//        }
         if(!this.$route.params.loginname){
             this.getUser();
           }
@@ -140,7 +140,11 @@
         clearUserInfo:'clearUserInfo'
       }),
       },
-
+      watch:{
+          '$route' (to,from){
+              this.getUser();
+          }
+      }
 
     }
 </script>

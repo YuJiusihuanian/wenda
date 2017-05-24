@@ -26,7 +26,7 @@
             <li v-for="(item,key) in topic.replies" :key="">
               <div class="infoimg">
                 <p>{{key+1}}楼</p>
-                <router-link to="/home">
+                <router-link :to="{name:'User',params:{loginname:item.author.loginname}}">
                   <img :src="item.author.avatar_url" alt="">
                 </router-link>
               </div>

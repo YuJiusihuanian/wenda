@@ -19,7 +19,7 @@
     data(){
       return{
         username:'',
-        token:'34d3ae05-0484-4efd-8591-f7c6512e3610'
+        token:''
       }
     },
     components:{
@@ -41,7 +41,7 @@
     },
 
     methods:{
-      //34d3ae05-0484-4efd-8591-f7c6512e3610
+      //
       login(){
         if(this.token === ''){
 //          console.log(this.token.length);
