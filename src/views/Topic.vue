@@ -43,7 +43,6 @@
                     <span>111</span>
                   </div>
                 </div>
-
             </li>
           </ul>
       </div>
@@ -67,6 +66,7 @@
 
       },
       created(){
+          //监听滚动条
           this.$nextTick(function () {
             window.addEventListener('scroll', this.onScroll)
           })

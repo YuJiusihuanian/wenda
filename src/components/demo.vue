@@ -1,47 +1,51 @@
 <template>
-  <!--<ul-->
-    <!--v-infinite-scroll=""-->
-    <!--infinite-scroll-disabled="loading"-->
-    <!--infinite-scroll-distance="10">-->
-    <!--<li v-for="item in list">{{ item }}</li>-->
-    <!--<div @click="ccc">div点击</div>-->
-    <!--<button @click="ccc">点击</button>-->
-    <!--<a @click="ccc">a点击</a>-->
-  <!--</ul>-->
-
+  <div class="demo">
+    <h1>mint-ui-example</h1>
+    <mt-button
+      type="primary"
+      @click="showToast">
+      选择操作
+    </mt-button>
+    <mt-actionsheet
+      cancel-text=""
+      :actions="actions"
+      :visible="sheetVisible">
+    </mt-actionsheet>
+  </div>
 
 </template>
+
 <script>
+  import { Toast, MessageBox } from 'mint-ui';
   export default {
+    name: 'app',
+
     data() {
       return {
-        topStatus: '',
-        selected:'',
-        list:[],
-        loading:false
-        // ...
+        sheetVisible: false,
+        actions: [{
+          name: '展示 Toast',
+          method: this.showToast
+        }, {
+          name: '展示 Message Box',
+          method: this.showMsgbox
+        }]
       };
     },
+
     methods: {
-        ccc(){
-            console.log(111);
-            this.$router.push('/message');
-        },
-      loadMore() {
-        this.loading = true;
-        setTimeout(() => {
-          let last = this.list[this.list.length - 1];
-          for (let i = 1; i <= 10; i++) {
-            this.list.push(last + i);
-          }
-          this.loading = false;
-        }, 2500);
+      showToast() {
+        Toast('这是一个 Toast');
+      },
+
+      showMsgbox() {
+        MessageBox('提示', '这是一个 Message Box');
       }
-      }
+    }
   };
 </script>
-<style scoped>
-  ul{
-    margin-bottom:200px;
+<style>
+  .demo a{
+    fint-size:0.32rem;
   }
 </style>

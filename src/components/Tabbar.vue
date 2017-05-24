@@ -1,23 +1,23 @@
 <template>
-    <mt-tabbar v-model="selected" id="tabbar" :fixed=true>
+    <mt-tabbar v-model="selected" id="Tabbar" :fixed=true>
         <mt-tab-item href="#/home" id="1">
-          <img v-show="this.$route.path ==='/home'" slot="icon" src="../assets/svg/home.svg">
-          <img v-show="this.$route.path !=='/home'" slot="icon" src="../assets/svg/home-hover.svg">
+          <img v-show="this.$route.name ==='Home'" slot="icon" src="../assets/svg/home.svg">
+          <img v-show="this.$route.name !== 'Home'" slot="icon" src="../assets/svg/home-hover.svg">
           首页
         </mt-tab-item>
         <mt-tab-item  href="#/publish" id="2">
-          <img v-show="this.$route.path === '/publish'" slot="icon" src="../assets/svg/publish.svg">
-          <img v-show="this.$route.path !== '/publish'" slot="icon" src="../assets/svg/publish-hover.svg">
+          <img v-show="this.$route.name === 'Publish'" slot="icon" src="../assets/svg/publish.svg">
+          <img v-show="this.$route.name !== 'Publish'" slot="icon" src="../assets/svg/publish-hover.svg">
           发表
         </mt-tab-item>
         <mt-tab-item  href="#/message" id="3">
-          <img v-show="this.$route.path === '/message'" slot="icon" src="../assets/svg/message.svg">
-          <img v-show="this.$route.path !== '/message'" slot="icon" src="../assets/svg/message-hover.svg">
+          <img v-show="this.$route.name === 'Message'" slot="icon" src="../assets/svg/message.svg">
+          <img v-show="this.$route.name !== 'Message'" slot="icon" src="../assets/svg/message-hover.svg">
           消息
         </mt-tab-item>
         <mt-tab-item  href="#/more" id="4">
-          <img v-show="this.$route.path === '/more'" slot="icon" src="../assets/svg/more.svg">
-          <img v-show="this.$route.path !== '/more'" slot="icon" src="../assets/svg/more-hover.svg">
+          <img v-show="this.$route.name === 'More' ||　this.$route.name === 'User'" slot="icon" src="../assets/svg/more.svg">
+          <img v-show="this.$route.name != 'More' &&　this.$route.name != 'User'" slot="icon" src="../assets/svg/more-hover.svg">
           我的
         </mt-tab-item>
     </mt-tabbar>
@@ -32,6 +32,11 @@
             fixed:true,
             selected:''
         }
+      },
+      mounted(){
+          if(this.$route.path){
+              console.log(this.$route.name);
+    }
       },
       methods:{
 
@@ -58,7 +63,7 @@
 
 <style lang="less" scpoed>
   @import '../less/common.less';
-  #tabbar a{
+  #Tabbar a{
     color:#8a8a8a;
     font-size:0.3rem;
     background-color:#fff !important;

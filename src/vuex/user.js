@@ -2,7 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex'
 Vue.use(Vuex);
 
-const userStore = new Vue.Store({
+const userStore = new Vuex.Store({
+  strict: true,
   state:{
     userInfo:{}
   },
@@ -14,12 +15,17 @@ const userStore = new Vue.Store({
   mutations:{
     setUserInfo(state,userInfo){
       state.userInfo = userInfo;
+    },
+    clearUserInfo(state){
+      state.userInfo = '';
     }
   },
-  action:{
+  actions:{
     //ES6语法，调用mutation
-    srtUserInfo({ commit },user){
-      commit('setUserInfo',user);
+    setUserInfo({ commit },user){
+      commit('setUserInfo', user);
     }
   }
 })
+
+export default userStore;

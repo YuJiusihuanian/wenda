@@ -9,7 +9,7 @@ const Publish = resolve => require(['../views/Publish.vue'], resolve);
 const Message = resolve => require(['../views/Message.vue'], resolve);
 const More = resolve => require(['../views/More.vue'], resolve);
 const Topic = resolve => require(['../views/Topic.vue'], resolve);
-
+const User = resolve => require(['../views/User.vue'], resolve);
 export default new Router({
   mode:'hash',
   routes: [
@@ -36,7 +36,7 @@ export default new Router({
     {
       path: '/more',
       name: 'More',
-      component: More
+      component: More,
     },
     {
       path:'/topic/:id',
@@ -44,7 +44,13 @@ export default new Router({
       component: Topic
     },
     {
+      path:'/user/:loginname',
+      name:'User',
+      component:User
+    },
+    {
       path:'*',
+      name:'All',
       component:Home
     }
   ]
