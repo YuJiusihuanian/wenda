@@ -65,7 +65,8 @@
           let user = {
             loginname:response.data.loginname,
             avatar_url:response.data.avatar_url,
-            token:this.token
+            token:this.token,
+            userId:response.data.id
           };
           //存储用户信息
           window.window.sessionStorage.user = JSON.stringify(user);
@@ -80,8 +81,8 @@
 
 
         }.bind(this)).catch(function(error){
-          if(error.response){
-            Toast(error.response.data.error_msg);
+          if(error.data.response){
+            Toast(error.data.response.data.error_msg);
           }
         }.bind(this))
       },
@@ -92,14 +93,13 @@
 <style lang="less">
   #Login{
     width:100%;
-    height:100%;
     background-color:#fff;
     margin:0 auto;
   }
   #Login .login{
     margin:0 auto;
-    margin-top:1.5rem;
     width:90%;
+    padding-top:1.5rem;
   }
   #Login .loginbtn{
     width:100%;

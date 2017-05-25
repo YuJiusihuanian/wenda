@@ -64,6 +64,7 @@
         this.$router.push({
           name:'More'
         })
+        return false;
       }
       this.$ajax({
         method: 'get',

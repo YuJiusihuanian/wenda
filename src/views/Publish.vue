@@ -22,7 +22,8 @@
         topic: {
           tab: 'ask',
           title: '',
-          content: ''
+          content: '',
+          vs:'<p>from vue-wenda</p>'
         },
         err:'',
         slots: [
@@ -72,7 +73,7 @@
           let data = {
               title:this.topic.title,
               tab:this.topic.tab,
-              content:this.topic.content,
+              content:this.topic.content + this.vs,
               accesstoken:this.userInfo.token
           }
           let addData = qs.stringify(data);
@@ -88,14 +89,15 @@
 
           }).then(function(res){
               console.log(res);
-              if(res.success){
+              if(res.data.success){
                   this.$router.push({
                     name:'Home'
                   })
               }
-          }).catch(function(error){
-            if(error.response){
-              Toast(error.response.data.error_msg);
+          }.bind(this)).catch(function(error){
+              console.log(error);
+            if(error.data.response){
+              Toast(error.data.response.data.error_msg);
             }
             return false;
           })
@@ -180,7 +182,7 @@
     font-size:0.38rem;
     background:#FDDF6D;
     padding:0.26rem 0;
-    color:#fff;
+    color:#8a8a8a;
   }
   #Publish .mint-toast-text{
      font-size:0.32rem;

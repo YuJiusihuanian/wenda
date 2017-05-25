@@ -39,12 +39,12 @@
     },
   }
 </script>
-<style lang="less">
+<style lang="less" scoped>
   #More{
     width:100%;
-    height:100%;
     background-color:#fff;
     margin:0 auto;
+    height:100%;
   }
 </style>
 

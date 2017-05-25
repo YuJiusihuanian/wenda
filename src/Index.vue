@@ -22,5 +22,8 @@
   body{
     background:url(./assets/gif/login4.gif) no-repeat center #fff;
     background-size:1.2rem 1.2rem;
+    height:100%;
+    width:100%;
+    line-height:1;
   }
 </style>
