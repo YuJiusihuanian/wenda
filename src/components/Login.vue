@@ -12,6 +12,7 @@
   </div>
 </template>
 <script>
+  var qs = require('qs');
   import { Toast } from 'mint-ui';
     import { mapGetters , mapMutations} from 'vuex'
   export default{
@@ -19,7 +20,7 @@
     data(){
       return{
         username:'',
-        token:''
+        token:'34d3ae05-0484-4efd-8591-f7c6512e3610'
       }
     },
     components:{
@@ -52,12 +53,13 @@
           })
           return false;
         }
+        let data ={
+          accesstoken:this.token
+        }
+        let tokendata = qs.stringify(data);
         this.$ajax({
           method:'post',
-          responseType:'json',
-          params:{
-            accesstoken:this.token
-          },
+          data:tokendata,
           url:'https://cnodejs.org/api/v1/accesstoken',
         }).then(function(response){
           let user = {
@@ -119,6 +121,10 @@
   }
   .mint-toast-text{
     font-size:0.32rem;
+  }
+  #Login .loginname .mintui-field-error{
+    font-size:0.32rem;
+    color:#888;
   }
 </style>
 

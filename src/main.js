@@ -8,6 +8,7 @@ import filters from './filters';
 import store from './vuex/user.js'
 import 'mint-ui/lib/style.css';
 
+
 Vue.config.productionTip = false
 Vue.use(Mint);
 Vue.prototype.$ajax = axios;

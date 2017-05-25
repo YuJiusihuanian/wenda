@@ -70,8 +70,6 @@
         responseType: 'json',
         url: 'https://cnodejs.org/api/v1/messages?accesstoken=' + this.userInfo.token,
       }).then(function(res){
-          console.log(res.data.data);
-          console.log(res.data.data.has_read_messages);
           if(res.data.data.has_read_messages.length > 0){
             this.messageData = res.data.data.has_read_messages;
           }
