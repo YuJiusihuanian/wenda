@@ -18,7 +18,7 @@
     data(){
       return{
         username:'',
-        token:'34d3ae05-0484-4efd-8591-f7c6512e3610'
+        token:''
       }
     },
     components:{
