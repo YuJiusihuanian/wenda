@@ -60,7 +60,10 @@
     },
     mounted(){
       if(!this.userInfo.loginname){
-        Toast('请先登录!');
+        Toast({
+          message:'请先登陆！',
+          className:'toast'
+        })
         this.$router.push({
           name:'More'
         })
@@ -135,6 +138,9 @@
   #Message .message .nametime{
     display:flex;
     justify-content:space-between;
+  }
+  #Message .toast span{
+    font-size:0.32rem !important;
   }
 </style>
 

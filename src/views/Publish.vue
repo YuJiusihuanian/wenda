@@ -53,7 +53,10 @@
     methods:{
         addTopic(){
           if(!this.userInfo.loginname){
-            Toast('请先登录!');
+            Toast({
+              message:'请先登陆！',
+              className:'toast'
+            })
             this.$router.push({
               name:'More'
             })
@@ -64,10 +67,16 @@
           let contents = this.topic.content;
 
           if(!title){
-              return Toast('标题不能为空');
+            Toast({
+              message:'标题不能为空！',
+              className:'toast'
+            })
               return false;
           }else if(!contents){
-              return Toast('内容不能为空');
+            Toast({
+              message:'内容不能为空！',
+              className:'toast'
+            })
               return false;
           }
           let data = {
@@ -95,7 +104,10 @@
               }
           }.bind(this)).catch(function(error){
             if(error.data.response){
-              Toast(error.data.response.data.error_msg);
+              Toast({
+                message:error.data.response.data.error_msg,
+                className:'toast'
+              })
             }
             return false;
           })
@@ -182,8 +194,8 @@
     padding:0.26rem 0;
     color:#8a8a8a;
   }
-  #Publish .mint-toast-text{
-     font-size:0.32rem;
+  #Publish .toast span{
+     font-size:0.32rem !important;
    }
 </style>
 

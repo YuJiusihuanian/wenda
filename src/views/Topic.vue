@@ -143,7 +143,10 @@
                 this.$router.push({
                   name:'More'
                 })
-              Toast('请先登录!')
+              Toast({
+                message:'请先登陆！',
+                className:'toast'
+              })
             }else{
                 let accessdata = qs.stringify({
                   accesstoken:this.userInfo.token
@@ -163,14 +166,20 @@
                     }
                 }.bind(this)).catch(function(error){
                   if(error.response){
-                    Toast(error.response.data.error_msg);
+                    Toast({
+                      message:error.response.data.error_msg,
+                      className:'toast'
+                    })
                   }
                 })
             }
         },
         Replybtn(key,replies){
             if(!this.userInfo.loginname){
-              Toast('请先登录!');
+              Toast({
+                message:'请先登陆！',
+                className:'toast'
+              })
               this.$router.push({
                 name:'More'
               })
@@ -207,7 +216,10 @@
                 this.show = -1;
             }.bind(this)).catch(function(error){
               if(error.response){
-                Toast(error.response.data.error_msg);
+                Toast({
+                  message:error.response.data.error_msg,
+                  className:'toast'
+                })
               }
             })
         },
@@ -217,7 +229,10 @@
             this.$router.push({
               name:'More'
             })
-            return Toast('请先登录!')
+            return Toast({
+              message:'请先登陆！',
+              className:'toast'
+            })
           }else{
               if(key === this.show){
                   this.show = -1;
@@ -404,5 +419,8 @@
     font-size:0.32rem;
     height:0.8rem;
     background-color:#FDDF6D;
+  }
+  #Topic .toast span{
+    font-size:0.32rem !important;
   }
 </style>

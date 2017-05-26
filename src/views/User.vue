@@ -105,7 +105,10 @@
           getUser(){
               let loginname = this.$route.params.loginname;
               if(!loginname){
-                Toast('登录失败，请重新登录！');
+                Toast({
+                  message:'登录失败，请重新登录！',
+                  className:'toast'
+                })
                 this.$router.push({
                   name:'More'
                 });
@@ -247,7 +250,7 @@
 
 
 
-  .mint-toast-text{
+  #User .toast span{
     font-size:0.32rem;
   }
 </style>

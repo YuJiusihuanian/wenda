@@ -80,7 +80,10 @@
 
         }.bind(this)).catch(function(error){
           if(error.data.response){
-            Toast(error.data.response.data.error_msg);
+            Toast({
+              message:error.data.response.data.error_msg,
+              className:'toast',
+            })
           }
         }.bind(this))
       },
@@ -118,12 +121,15 @@
   #Login .loginname .mint-field-core{
     font-size:0.32rem !important;
   }
-  .mint-toast-text{
-    font-size:0.32rem;
+  #Login .toast span{
+    font-size:0.32rem !important;
   }
   #Login .loginname .mintui-field-error{
     font-size:0.32rem;
     color:#888;
+  }
+  #Login .mint-toast-text{
+    font-size:0.32rem !important;
   }
 </style>
 
