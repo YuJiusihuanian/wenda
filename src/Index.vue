@@ -12,7 +12,7 @@
           this.$router.push({
             name:'Home',
           });
-      },3000);
+      },2000);
   }
 }
 </script>

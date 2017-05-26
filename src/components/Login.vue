@@ -4,16 +4,14 @@
       <mt-field class="loginname" placeholder="Access Token" v-model="token" maxlength="36"></mt-field>
       <mt-button @click="login" size="normal" class="loginbtn" type="default">登录</mt-button>
     </div>
-    <ul>
-      <li>{{userInfo.loginname}}</li>
-      <li>1</li>
-      <li>关于</li>
-    </ul>
+
+    <a-bout class="about"></a-bout>
   </div>
 </template>
 <script>
   var qs = require('qs');
   import { Toast } from 'mint-ui';
+  import About from './About.vue';
     import { mapGetters , mapMutations} from 'vuex'
   export default{
     name:'Login',
@@ -24,6 +22,7 @@
       }
     },
     components:{
+        'a-bout':About
     },
     computed:{
       ...mapGetters({
@@ -100,6 +99,7 @@
     margin:0 auto;
     width:90%;
     padding-top:1.5rem;
+    padding-bottom:1.5rem;
   }
   #Login .loginbtn{
     width:100%;

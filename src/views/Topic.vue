@@ -44,16 +44,21 @@
                       <img v-if="inArray(userInfo.userId,item.ups,true)" @click="upGood(item)" src="../assets/svg/good-hover.svg" alt=""> {{item.ups.length}}
                     </span>
                     <span>
-                      <img @click="addReply(key)" src="../assets/svg/reply.svg" alt="">
+                      <img v-show="show != key" @click="addReply(key)" src="../assets/svg/reply.svg" alt="">
+                      <img v-show="show === key" @click="addReply(key)" src="../assets/svg/reply-hover.svg" alt="">
                     </span>
                   </div>
                 </div>
-              <div class="reply" v-show="show === key">
-                <mt-field v-model="replycontent" class="content" placeholder="请输入发表的内容" type="textarea" rows="10"></mt-field>
-                <mt-button @click="Replybtn(topic.replies[key],topic.replies)" size="normal" class="loginbtn" type="default">回复</mt-button>
+              <div class="comment" v-show="show === key">
+                <mt-field v-model="replycontent" class="commenttext" placeholder="请输入发表的内容" type="textarea" rows="6"></mt-field>
+                <mt-button @click="Replybtn(topic.replies[key],topic.replies)" size="normal" class="commentbtn" type="default">回复</mt-button>
               </div>
             </li>
           </ul>
+      </div>
+      <div class="topicreply">
+        <mt-field v-model="replycontent" class="commenttext" placeholder="请输入发表的内容" type="textarea" rows="6"></mt-field>
+        <mt-button @click="Replybtn(false,topic.replies)" size="normal" class="commentbtn" type="default">回复</mt-button>
       </div>
     </div>
   </div>
@@ -126,6 +131,7 @@
         getLastTimeStr(time, ago) {
           return utils.getLastTimeStr(time, ago);
         },
+        //滚动
         onScroll(){
             let scrolltop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
               if( scrolltop > 200 ){
@@ -168,12 +174,16 @@
         Replybtn(key,replies){
 //          console.log(replies);
 //          console.log(replies.id);
-            let id = key.id;
+//            let id = key.id;
+
             let time = new Date();
             let data = {
               accesstoken:this.userInfo.token,
               content:this.replycontent + this.addtext,
-              reply_id:id
+//              reply_id:id
+            }
+            if(key){
+                data.reply_id = key.id;
             }
             let postData = qs.stringify(data);
             this.$ajax({
@@ -181,10 +191,10 @@
               url:'https://cnodejs.org/api/v1/topic/' + this.topicId + '/replies',
               data:postData
             }).then(function(res){
-//                console.log(res);
                 if(res.data.success){
                   console.log(res);
                   console.log(replies);
+                  console.log(this.$router.query);
                   replies.push({
                     id:res.data.reply_id,
                     author:{
@@ -206,6 +216,7 @@
             })
         },
         addReply(key){
+            let replyname = this.topic.replies[key].author.loginname;
           if(!this.userInfo.userId){
             this.$router.push({
               name:'More'
@@ -218,10 +229,11 @@
                 this.show = key;
                 this.replycontent = '';
                 this.replyId = this.topic.replies[key].id;
-                console.log(this.replyId);
+                this.replycontent = '@' + replyname + ' ';
+
               }
           }
-        }
+        },
       },
       watch:{
 
@@ -229,7 +241,7 @@
 
     }
 </script>
-<style lang="less" scoped>
+<style lang="less">
   @import '../less/github-markdown.css';
   #Topic{
     background:#fff;
@@ -382,5 +394,19 @@
   #Topic .reply .infouse img{
     width:0.3rem;
     height:0.3rem;
+  }
+  #Topic .comment{
+    width:94%;
+    margin:0 auto;
+    border:1px solid #FDDF6D;
+  }
+  #Topic .commenttext .mint-field-core{
+    font-size:0.32rem !important;
+  }
+  #Topic .commentbtn{
+    width:100%;
+    font-size:0.32rem;
+    height:0.8rem;
+    background-color:#FDDF6D;
   }
 </style>
