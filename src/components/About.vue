@@ -25,7 +25,7 @@
           </Li>
           <Li>
             <h4>技术栈</h4>
-            <p>vue vue-router vue-vuex axios Mint-ui babel</p>
+            <p>基于vue vue-router vue-vuex axios Mint-ui babel的单页面应用webapp</p>
           </Li>
           <Li>
             <h4>意见反馈</h4>

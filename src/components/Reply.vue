@@ -13,13 +13,7 @@
             }
       },
       methods:{
-        Replybtn(){
-          if(!this.content){
-              console.log('内容不能为空');
-          }else{
 
-          }
-        }
       }
     }
 </script>

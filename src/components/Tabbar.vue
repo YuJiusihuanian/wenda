@@ -34,9 +34,8 @@
         }
       },
       mounted(){
-          if(this.$route.path){
-              console.log(this.$route.name);
-    }
+//          if(this.$route.path){
+//    }
       },
       methods:{
 

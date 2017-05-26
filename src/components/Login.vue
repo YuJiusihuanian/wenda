@@ -44,7 +44,6 @@
       //
       login(){
         if(this.token === ''){
-//          console.log(this.token.length);
           Toast({
             message:'请输入正确的36位Access Token',
             className:'toast',

@@ -87,7 +87,6 @@
           this.getTopics();
           this.loading = false;
 //          this.loginimg = false;
-          console.log(this.topicarg.page);
         }, 2500);
       },
       getTopics(tab){

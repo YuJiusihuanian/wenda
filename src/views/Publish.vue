@@ -88,14 +88,12 @@
             data:addData
 
           }).then(function(res){
-              console.log(res);
               if(res.data.success){
                   this.$router.push({
                     name:'Home'
                   })
               }
           }.bind(this)).catch(function(error){
-              console.log(error);
             if(error.data.response){
               Toast(error.data.response.data.error_msg);
             }

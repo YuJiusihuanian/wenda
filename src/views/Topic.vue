@@ -102,10 +102,8 @@
             url:'https://cnodejs.org/api/v1/topic/' + this.topicId
           })
             .then(function(response){
-//                console.log(response.data.data);
                 if(response.data.data){
                   this.topic = response.data.data;
-//                  console.log(this.topic);
                 }else{
                   this.noData = true;
                 }
@@ -155,7 +153,6 @@
                   url:'https://cnodejs.org/api/v1/reply/' + item.id +'/ups',
                   data:accessdata
                 }).then(function(res){
-                    console.log(res);
                     if(res.data.success){
                         if(res.data.action === 'down'){
                             let index = this.inArray(this.userInfo.userId,item.ups,true);
@@ -172,15 +169,17 @@
             }
         },
         Replybtn(key,replies){
-//          console.log(replies);
-//          console.log(replies.id);
-//            let id = key.id;
-
+            if(!this.userInfo.loginname){
+              Toast('请先登录!');
+              this.$router.push({
+                name:'More'
+              })
+              return false;
+            }
             let time = new Date();
             let data = {
               accesstoken:this.userInfo.token,
               content:this.replycontent + this.addtext,
-//              reply_id:id
             }
             if(key){
                 data.reply_id = key.id;
@@ -192,9 +191,6 @@
               data:postData
             }).then(function(res){
                 if(res.data.success){
-                  console.log(res);
-                  console.log(replies);
-                  console.log(this.$router.query);
                   replies.push({
                     id:res.data.reply_id,
                     author:{
